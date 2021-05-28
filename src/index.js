@@ -6,10 +6,6 @@ import {Button} from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import reportWebVitals from './reportWebVitals';
 
-function handleClick() {
-  return <Test />;
-}
-
 ReactDOM.render(
   <>
   <center>
