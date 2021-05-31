@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import Quiz from './components/Quiz';
 import Result from './components/Result';
+import FAQ from './components/FAQ';
 import quizQuestions from './api/quizQuestions';
 import './index.css';
 
@@ -75,7 +76,8 @@ function Test() {
   }
 
   return (
-      <div className="App" style={{textAlign: "left", backgroundColor:"#F4F4F4"}}>
+    <>
+      <div className="App" style={{paddingBottom:50, marginBottom:50, textAlign: "left", backgroundColor:"#F4F4F4"}}>
         <div className="header">
           <h2>Eligibility Test</h2>
         </div>
@@ -88,7 +90,8 @@ function Test() {
         onAnswerSelected={handleAnswerSelected}
         />
       </div>
-    
+      <FAQ /> 
+      </>   
     );
   }
   
