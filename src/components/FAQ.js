@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 function FAQ(props) {
   return (
     <>
-    <div className="faq">
+    <div className="faq p-5">
     <h3>Frequently Asked Questions</h3>
     <br></br>
     <h5> What are Sustainable Development Goals? </h5>

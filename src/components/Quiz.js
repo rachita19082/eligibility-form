@@ -20,7 +20,7 @@ function Quiz(props) {
     }
 
     return (
-        <div className="quiz">
+        <div className="quiz p-3">
           <QuestionCount
             counter={props.questionId}
             total={props.questionTotal}

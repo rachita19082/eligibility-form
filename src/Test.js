@@ -79,7 +79,7 @@ function Test() {
 
   return (
     <>
-      <div className="App" style={{paddingBottom:50, textAlign: "left"}}>
+      <div className="App" style={{paddingBottom:40, textAlign: "left"}}>
         <div className="header">
           <h2>Eligibility Test</h2>
         </div>
@@ -94,16 +94,16 @@ function Test() {
       </div>
       <div className="text-center">
         <Button 
-          className="actionButton"
-          style={{width: "200px", marginRight:30, marginBottom:80}}
+          className="actionButton mr-4 ml-2"
+          style={{width: "200px", marginBottom:80}}
           variant="secondary"
           onClick={(e) => handleClick(false)}
           disabled={!prev}>
           Back
         </Button>
         <Button
-          className="actionButton"
-          style={{width: "200px", marginLeft:30, marginBottom:80}}
+          className="actionButton ml-4 mr-2"
+          style={{width: "200px", marginBottom:80}}
           variant="secondary"
           onClick={(e) => handleClick(true)}
           disabled={!next}>
