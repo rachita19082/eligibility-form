@@ -3,10 +3,13 @@ import Quiz from './components/Quiz';
 import Result from './components/Result';
 import FAQ from './components/FAQ';
 import quizQuestions from './api/quizQuestions';
+import {Button} from "react-bootstrap";
 import './index.css';
 
 function Test() {
   const [counter, setCounter] = useState(0);
+  const [prev, setPrev] = useState(false);
+  const [next, setNext] = useState(false);
   const [questionId, setQuestionId] = useState(1);
   const [question, setQuestion] = useState(quizQuestions[0].question);
   const [answerOptions, setAnswerOptions] = useState(['Yes', 'No']);
@@ -27,6 +30,9 @@ function Test() {
 
   function handleAnswerSelected(event) {
     setUserAnswer(event.currentTarget.value);
+  }
+
+  function handleClick(next) {
   }
 
   function setNextQuestion() {
@@ -52,10 +58,6 @@ function Test() {
     }
   }
 
-  function componentDidMount() {    
-    setQuestion(quizQuestions[0].question);
-  }
-
   function renderQuiz() {
     return (
       <Quiz
@@ -77,7 +79,7 @@ function Test() {
 
   return (
     <>
-      <div className="App" style={{paddingBottom:50, marginBottom:50, textAlign: "left", backgroundColor:"#F4F4F4"}}>
+      <div className="App" style={{paddingBottom:50, textAlign: "left"}}>
         <div className="header">
           <h2>Eligibility Test</h2>
         </div>
@@ -90,7 +92,27 @@ function Test() {
         onAnswerSelected={handleAnswerSelected}
         />
       </div>
+      <div className="text-center">
+        <Button 
+          className="actionButton"
+          style={{width: "200px", marginRight:30, marginBottom:80}}
+          variant="secondary"
+          onClick={(e) => handleClick(false)}
+          disabled={!prev}>
+          Back
+        </Button>
+        <Button
+          className="actionButton"
+          style={{width: "200px", marginLeft:30, marginBottom:80}}
+          variant="secondary"
+          onClick={(e) => handleClick(true)}
+          disabled={!next}>
+          Next
+        </Button>
+      </div>
+      <div style={{backgroundColor:"#F4F4F4"}}>
       <FAQ /> 
+      </div>
       </>   
     );
   }

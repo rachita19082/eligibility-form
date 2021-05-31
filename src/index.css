@@ -34,12 +34,20 @@ body {
   border-radius: 3px;
 }
 
+.actionButton {
+  margin: 0 10 10 10;
+  border-radius: 3px;
+}
+
 .faq {
   position: relative;
   max-width: 800px;
   margin: 0 auto;
-  margin-bottom: 80px;
+  margin-bottom: 0;
+  padding-bottom: 60px;
+  padding-top: 40px;
   border-radius: 3px;
+  background-color: #F4F4F4;
 }
 
 @media (min-width: 769px) {
@@ -57,7 +65,7 @@ body {
 
 /* QuestionCount Component */
 .questionCount {
-  padding: 1.5rem 2.5rem 0;
+  padding: 1.5rem 2.5rem 1rem;
   font-size: 14px;
 }
 
