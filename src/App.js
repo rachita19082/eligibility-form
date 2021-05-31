@@ -1,24 +1,37 @@
-import logo from './logo.svg';
+import React, {useState} from "react";
+import Test from './Test';
 import './App.css';
+import {Button} from "react-bootstrap";
+
 
 function App() {
+  const [startTest, setStartTest] = useState(false);
+
+  function handleClick() {
+    setStartTest(true);
+  }
+
+  if (startTest) {
+    return (      
+      <Test />      
+    );
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+  <center>
+    <h1 style={{margin:20}}>    
+      DPG Eligibility Test
+    </h1>
+    <Button
+      variant="primary"
+      style={{margin:20}}
+      onClick={(e) => handleClick()}
+    >
+      Start test
+    </Button>
+  </center>
+  </>
   );
 }
 
