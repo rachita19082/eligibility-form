@@ -11,15 +11,16 @@ function AnswerOption(props) {
 
   return (
     <li className="answerOption">
-      <label className="radioCustomLabel" htmlFor={props.answerType}>
+      <label className="radioCustomLabel" htmlFor={props.key}>
       <input
+        id={props.key}
         type="radio"
         className="radioCustomButton"
         checked={answer === props.key}
         value={props.key}
         onChange={onValueChange}
       />
-      <div classname="optionContent">  {props.answerContent} </div>
+      <span className="optionContent"> {props.answerContent} </span>
       </label>
     </li>
   );
