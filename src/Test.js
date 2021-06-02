@@ -33,8 +33,11 @@ function Test() {
   function handleClick(param) {
     if (param && counter<8) {
       setNextQuestion();      
+    } else if (counter > 1) {
+      setPrevQuestion();
     } else {
-      //do nothing for now
+      setPrev(false);
+      setPrevQuestion();
     }
   }
 
@@ -44,6 +47,12 @@ function Test() {
     setQuestionId(questionId + 1);    
     setPrev(true);
     setAnswer('');
+  }
+
+  function setPrevQuestion() {
+    setQuestion(quizQuestions[counter-1].question);
+    setCounter(counter - 1);
+    setQuestionId(questionId - 1);    
   }
 
   function getResults() {
@@ -88,7 +97,7 @@ function Test() {
           <div className="header">
             <h2>Eligibility Test</h2>
           </div>
-          
+                
           <Quiz
           answer={answer}
           answerOptions={answerOptions}
@@ -97,6 +106,7 @@ function Test() {
           questionTotal={quizQuestions.length}
           onAnswerSelected={handleAnswerSelected}
           />
+
         </div>
         <div className="text-center">
           <Button 
