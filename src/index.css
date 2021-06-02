@@ -101,7 +101,7 @@ body {
   line-height: 1.5;
 }
 
-.radioCustomButton ~ .radioCustomLabel:before {
+.radioCustomButton ~ .optionContent:before {
   position: absolute;
   top: 20px;
   left: 38px;
@@ -114,13 +114,16 @@ body {
   border: 1px solid #bbb;
   border-radius: 50%;
   transition: all 0.3s;
+  color: blue;
 }
 
-.radioCustomButton:checked ~ .radioCustomLabel:before {
+.radioCustomButton:checked ~ .optionContent:before {
   content: '';
   background: #8bc53f url(./svg/icon-check.svg) no-repeat;
   background-size: 27px;
   border-color: #8bc53f;
+  font-weight: 100;
 }
+
 
  

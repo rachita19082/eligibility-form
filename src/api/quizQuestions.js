@@ -1,6 +1,6 @@
 var quizQuestions = [
   {
-      question: "Relevance to Sustainable Development Goals?",
+      question: "Is the project relevant to one of the Sustainable Development Goals?",
       answers: [
           {
               type: "Microsoft",
@@ -43,7 +43,7 @@ var quizQuestions = [
       ]
   },
   {
-      question: "Which of these games do you think is best?",
+      question: "Does the license of libraries/dependencies undermine the openess of the project?",
       answers: [
           {
               type: "Microsoft",
@@ -60,7 +60,7 @@ var quizQuestions = [
       ]
   },
   {
-      question: "What console would you prefer to own?",
+      question: "Is there documentation?",
       answers: [
           {
               type: "Microsoft",
@@ -75,6 +75,74 @@ var quizQuestions = [
               content: "Playstation 4"
           }
       ]
+  },
+  {
+    question: "Does this project collect or use non-personally identifiable information (non-PII) data?",
+    answers: [
+        {
+            type: "Microsoft",
+            content: "X-Box One"
+        },
+        {
+            type: "Nintendo",
+            content: "Wii U"
+        },
+        {
+            type: "Sony",
+            content: "Playstation 4"
+        }
+    ]
+  },
+  {
+    question: "Does the project adhere to privacy and other applicable international and domestic laws?",
+    answers: [
+        {
+            type: "Microsoft",
+            content: "X-Box One"
+        },
+        {
+            type: "Nintendo",
+            content: "Wii U"
+        },
+        {
+            type: "Sony",
+            content: "Playstation 4"
+        }
+    ]
+  },
+  {
+    question: "Does the project adhere to standards and best practices?",
+    answers: [
+        {
+            type: "Microsoft",
+            content: "X-Box One"
+        },
+        {
+            type: "Nintendo",
+            content: "Wii U"
+        },
+        {
+            type: "Sony",
+            content: "Playstation 4"
+        }
+    ]
+  },
+  {
+    question: "Does the project do no harm?",
+    answers: [
+        {
+            type: "Microsoft",
+            content: "X-Box One"
+        },
+        {
+            type: "Nintendo",
+            content: "Wii U"
+        },
+        {
+            type: "Sony",
+            content: "Playstation 4"
+        }
+    ]
   }
 ];
 

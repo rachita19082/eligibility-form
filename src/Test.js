@@ -18,27 +18,31 @@ function Test() {
   const [result, setResult] = useState('');
 
   function setUserAnswer(answer) {
-    
-    this.setState((state) => ({
-      answersCount: {
-        ...state.answersCount,
-        [answer]: (state.answersCount[answer] || 0) + 1
-      },
-      answer: answer
-    }));
+    setAnswer(answer);    
   }
 
   function handleAnswerSelected(event) {
     setUserAnswer(event.currentTarget.value);
+    if (questionId < quizQuestions.length) {
+      setNext(true);
+    } else {
+      // do nothing for now
+    }
   }
 
-  function handleClick(next) {
+  function handleClick(param) {
+    if (param && counter<8) {
+      setNextQuestion();      
+    } else {
+      //do nothing for now
+    }
   }
 
   function setNextQuestion() {
+    setQuestion(quizQuestions[counter+1].question);
     setCounter(counter + 1);
-    setQuestionId(questionId + 1);
-    setQuestion(quizQuestions[counter].question);
+    setQuestionId(questionId + 1);    
+    setPrev(true);
     setAnswer('');
   }
 
@@ -77,44 +81,47 @@ function Test() {
     );
   }
 
-  return (
-    <>
-      <div className="App" style={{paddingBottom:40, textAlign: "left"}}>
-        <div className="header">
-          <h2>Eligibility Test</h2>
+  if(counter < 9) {
+    return (
+        <>
+        <div className="App" style={{paddingBottom:40, textAlign: "left"}}>
+          <div className="header">
+            <h2>Eligibility Test</h2>
+          </div>
+          
+          <Quiz
+          answer={answer}
+          answerOptions={answerOptions}
+          questionId={questionId}
+          question={question}
+          questionTotal={quizQuestions.length}
+          onAnswerSelected={handleAnswerSelected}
+          />
         </div>
-        <Quiz
-        answer={answer}
-        answerOptions={answerOptions}
-        questionId={questionId}
-        question={question}
-        questionTotal={quizQuestions.length}
-        onAnswerSelected={handleAnswerSelected}
-        />
-      </div>
-      <div className="text-center">
-        <Button 
-          className="actionButton mr-4 ml-2"
-          style={{width: "200px", marginBottom:80}}
-          variant="secondary"
-          onClick={(e) => handleClick(false)}
-          disabled={!prev}>
-          Back
-        </Button>
-        <Button
-          className="actionButton ml-4 mr-2"
-          style={{width: "200px", marginBottom:80}}
-          variant="secondary"
-          onClick={(e) => handleClick(true)}
-          disabled={!next}>
-          Next
-        </Button>
-      </div>
-      <div style={{backgroundColor:"#F4F4F4"}}>
-      <FAQ /> 
-      </div>
-      </>   
-    );
+        <div className="text-center">
+          <Button 
+            className="actionButton mr-4 ml-2"
+            style={{width: "200px", marginBottom:80}}
+            variant="secondary"
+            onClick={(e) => handleClick(false)}
+            disabled={!prev}>
+            Back
+          </Button>
+          <Button
+            className="actionButton ml-4 mr-2"
+            style={{width: "200px", marginBottom:80}}
+            variant="secondary"
+            onClick={(e) => handleClick(true)}
+            disabled={!next}>
+            Next
+          </Button>
+        </div>
+        <div style={{backgroundColor:"#F4F4F4"}}>
+        <FAQ /> 
+        </div>
+        </>   
+      );
+    }
   }
   
   export default Test;

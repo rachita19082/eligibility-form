@@ -6,45 +6,27 @@ import Question from './Question';
 
 function Quiz(props) {
 
-    function renderAnswerOptions(key) {
-        return (
-          <AnswerOption
-            key={key.content}
-            answerContent={key.content}
-            answerType={key.type}
-            answer={props.answer}
-            questionId={props.questionId}
-            onAnswerSelected={props.onAnswerSelected}
-          />
-        );
-    }
-
     return (
-        <div className="quiz p-3">
+        <div className="quiz pt-0 pl-3 pr-3">
           <QuestionCount
             counter={props.questionId}
             total={props.questionTotal}
           />
           <Question content={props.question} />
-          <ul className="answerOptions">
-            <li> 
+          <ul className="answerOptions">            
             <AnswerOption
                 key={"Yes"}
                 answerContent={"Yes"}
                 answer={props.answer}
-                questionId={props.questionId}
                 onAnswerSelected={props.onAnswerSelected}
-            /> 
-            </li>
-            <li> 
+            />            
+             
             <AnswerOption
                 key={"No"}
                 answerContent={"No"}
                 answer={props.answer}
-                questionId={props.questionId}
                 onAnswerSelected={props.onAnswerSelected}
-            /> 
-            </li>
+            />             
           </ul>
         </div>
     );
