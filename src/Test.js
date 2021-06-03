@@ -33,9 +33,9 @@ function Test() {
   function handleClick(param) {
     if (param && counter<8) {
       setNextQuestion();      
-    } else if (counter > 1) {
+    } else if (!param && counter > 1) {
       setPrevQuestion();
-    } else {
+    } else if (counter == 1) {
       setPrev(false);
       setPrevQuestion();
     }

@@ -15,15 +15,13 @@ function Quiz(props) {
           <Question content={props.question} />
           <ul className="answerOptions">            
             <AnswerOption
-                key={"Yes"}
-                answerContent={"Yes"}
+                answerContent="Yes"
                 answer={props.answer}
                 onAnswerSelected={props.onAnswerSelected}
             />            
              
             <AnswerOption
-                key={"No"}
-                answerContent={"No"}
+                answerContent="No"
                 answer={props.answer}
                 onAnswerSelected={props.onAnswerSelected}
             />             
