@@ -4,6 +4,7 @@ import Result from './components/Result';
 import FAQ from './components/FAQ';
 import quizQuestions from './api/quizQuestions';
 import {Button} from "react-bootstrap";
+import reportWebVitals from './reportWebVitals';
 import './index.css';
 
 function Test() {
@@ -14,11 +15,13 @@ function Test() {
   const [question, setQuestion] = useState(quizQuestions[0].question);
   const [answerOptions, setAnswerOptions] = useState(['Yes', 'No']);
   const [answer, setAnswer] = useState('');
+  const [answersList, setAnswerList] = useState({});
   const [answersCount, setAnswersCount] = useState({});
   const [result, setResult] = useState('');
 
-  function setUserAnswer(answer) {
-    setAnswer(answer);    
+  function setUserAnswer(ans) {
+    setAnswer(ans);
+    answersList[counter] = ans;
   }
 
   function handleAnswerSelected(event) {
@@ -43,15 +46,22 @@ function Test() {
 
   function setNextQuestion() {
     setQuestion(quizQuestions[counter+1].question);
+    if(!answersList[counter+1]) {
+      setNext(false);
+      setAnswer('');
+    }
+    if(answersList[counter+1]) {
+      setAnswer(answersList[counter+1]);
+    }
     setCounter(counter + 1);
     setQuestionId(questionId + 1);    
     setPrev(true);
-    setAnswer('');
   }
 
   function setPrevQuestion() {
     setQuestion(quizQuestions[counter-1].question);
-    setCounter(counter - 1);
+    setAnswer(answersList[counter-1]);
+    setCounter(counter - 1);    
     setQuestionId(questionId - 1);    
   }
 
@@ -135,6 +145,8 @@ function Test() {
   }
   
   export default Test;
+
+  reportWebVitals();
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
