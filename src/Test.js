@@ -18,6 +18,8 @@ function Test() {
   const [answersList, setAnswerList] = useState({});
   const [answersCount, setAnswersCount] = useState({});
   const [result, setResult] = useState('');
+  const [score, setScore] = useState(0);
+  const [buttonName, setButtonName] = useState('');
 
   function setUserAnswer(ans) {
     setAnswer(ans);
@@ -26,7 +28,7 @@ function Test() {
 
   function handleAnswerSelected(event) {
     setUserAnswer(event.currentTarget.value);
-    if (questionId < quizQuestions.length) {
+    if (questionId <= quizQuestions.length) {
       setNext(true);
     } else {
       // do nothing for now
@@ -36,6 +38,9 @@ function Test() {
   function handleClick(param) {
     if (param && counter<8) {
       setNextQuestion();      
+    } else if (param && counter == 8) {
+      getResults();
+      setCounter(counter + 1);
     } else if (!param && counter > 1) {
       setPrevQuestion();
     } else if (counter == 1) {
@@ -62,15 +67,25 @@ function Test() {
     setQuestion(quizQuestions[counter-1].question);
     setAnswer(answersList[counter-1]);
     setCounter(counter - 1);    
-    setQuestionId(questionId - 1);    
+    setQuestionId(questionId - 1);
+    setNext(true);    
   }
 
   function getResults() {
-    const answersCountKeys = Object.keys(answersCount);
-    const answersCountValues = answersCountKeys.map((key) => answersCount[key]);
-    const maxAnswerCount = Math.max.apply(null, answersCountValues);
-  
-    return answersCountKeys.filter((key) => answersCount[key] === maxAnswerCount);
+    let i = 0;
+    let scoreValue = 0
+    while (i < 9) {
+      if(answersList[i] === "Yes") {
+        scoreValue += 1;
+      }
+      i += 1;
+    }
+    setScore(scoreValue);
+    if(scoreValue == 9) {
+      setButtonName("Proceed");
+    } else if (scoreValue < 9) {
+      setButtonName("Start Again")
+    }
   }
 
   function setResults (result) {
@@ -93,21 +108,17 @@ function Test() {
       />
     );
   }
-  
-  function renderResult() {
-    return (
-      <Result quizResult={result} />
-    );
-  }
 
-  if(counter < 9) {
     return (
+      <>
+      <div className="header">
+        <h2>Eligibility Test</h2>
+      </div>
+      
+      <div>
+      {counter < 9 && (        
         <>
-        <div className="App" style={{paddingBottom:40, textAlign: "left"}}>
-          <div className="header">
-            <h2>Eligibility Test</h2>
-          </div>
-                
+        <div className="App" style={{paddingBottom:40, textAlign: "left"}}>                
           <Quiz
           answer={answer}
           answerOptions={answerOptions}
@@ -116,8 +127,8 @@ function Test() {
           questionTotal={quizQuestions.length}
           onAnswerSelected={handleAnswerSelected}
           />
-
         </div>
+
         <div className="text-center">
           <Button 
             className="actionButton mr-4 ml-2"
@@ -136,12 +147,40 @@ function Test() {
             Next
           </Button>
         </div>
+
         <div style={{backgroundColor:"#F4F4F4"}}>
         <FAQ /> 
         </div>
-        </>   
+        </>
+        )}
+
+        {counter == 9 && (
+          <>
+          <Result quizResult={score} />
+          <div className="text-center">
+            <Button 
+              className="actionButton mr-4 ml-2"
+              style={{width: "200px", marginBottom:80}}
+              variant="secondary"
+              onClick={(e) => handleClick(false)}
+              disabled={!prev}>
+              Back
+            </Button>
+            <Button
+              className="actionButton ml-4 mr-2"
+              style={{width: "200px", marginBottom:80}}
+              variant="secondary"
+              onClick={(e) => handleClick(true)}
+              disabled={!next}>
+              {buttonName}
+            </Button>
+          </div>
+          </>
+        )}
+        </div> 
+
+        </>
       );
-    }
   }
   
   export default Test;

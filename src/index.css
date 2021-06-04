@@ -70,6 +70,16 @@ body {
   padding: 0.5rem 2.5rem 1.5rem 2.5rem;
 }
 
+/* Result Component */
+.result {
+  padding: 1.5rem 2.5rem;
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 3px;
+}
+
 /* AnswerOption Component */
 .answerOption {
   border-top: 1px solid #eee;
