@@ -16,10 +16,9 @@ function Test() {
   const [answerOptions, setAnswerOptions] = useState(['Yes', 'No']);
   const [answer, setAnswer] = useState('');
   const [answersList, setAnswerList] = useState({});
-  const [answersCount, setAnswersCount] = useState({});
-  const [result, setResult] = useState('');
   const [score, setScore] = useState(0);
   const [buttonName, setButtonName] = useState('');
+  const [wrongQuestions, setWrongQuestions] = useState([]);
 
   function setUserAnswer(ans) {
     setAnswer(ans);
@@ -73,19 +72,25 @@ function Test() {
 
   function getResults() {
     let i = 0;
-    let scoreValue = 0
+    let scoreValue = 0;
+    let questionsList = [];
     while (i < 9) {
       if(answersList[i] === "Yes") {
         scoreValue += 1;
+      } else if(answersList[i] === "No") {
+        questionsList.push(quizQuestions[i]);
       }
       i += 1;
     }
     setScore(scoreValue);
+    setWrongQuestions(questionsList);
     if(scoreValue == 9) {
       setButtonName("Proceed");
     } else if (scoreValue < 9) {
       setButtonName("Start Again")
     }
+    console.log(questionsList);
+    console.log(wrongQuestions);
   }
 
   function setResults (result) {
@@ -156,7 +161,7 @@ function Test() {
 
         {counter == 9 && (
           <>
-          <Result quizResult={score} />
+          <Result quizScore={score} result={answersList} questions={wrongQuestions} />
           <div className="text-center">
             <Button 
               className="actionButton mr-4 ml-2"
