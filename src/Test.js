@@ -149,7 +149,7 @@ function Test() {
         </div>
 
         <div style={{backgroundColor:"#F4F4F4"}}>
-        <FAQ /> 
+        <FAQ content={quizQuestions[counter].faq} /> 
         </div>
         </>
         )}

@@ -6,17 +6,14 @@ function FAQ(props) {
     <div className="faq p-5">
     <h3>Frequently Asked Questions</h3>
     <br></br>
-    <h5> What are Sustainable Development Goals? </h5>
+    <h5> {props.content.subHeading} </h5>
     <p>
-        The Sustainable Development Goals are a plan of action to target and resolve the challenges we’re 
-        facing on the planet. They are not just about the environment (as the word ‘sustainability’ can 
-        sometimes suggest), they encompass much more than that, with goals targeting issues such as gender 
-        equality, poverty, and peace.
+        {props.content.text}
     </p>
     <div style={{color:"grey", marginTop:50}}>
-        <h5> SDG RESOURCES </h5>
-        <b>For additional resources about SDG please find in the link below <br></br>
-        <a href="https://sdgs.un.org/goals" style={{color:'black'}}>https://sdgs.un.org/goals</a>
+        <h5 class="text-uppercase"> {props.content.name} RESOURCES </h5>
+        <b>For additional resources about {props.content.name} please find in the link below <br></br>
+        <a href={props.content.link} style={{color:'black'}}>{props.content.link}</a>
         </b>
     </div>
     </div>
