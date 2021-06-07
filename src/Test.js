@@ -136,16 +136,16 @@ function Test() {
 
         <div className="text-center">
           <Button 
-            className="actionButton mr-4 ml-2"
-            style={{width: "200px", marginBottom:80}}
+            className="mr-4 ml-2"
+            style={{width: "200px", marginBottom:80, borderRadius:0, borderColor:"#4D29BA", backgroundColor:"white", color:"#4D29BA"}}
             variant="secondary"
             onClick={(e) => handleClick(false)}
             disabled={!prev}>
             Back
           </Button>
           <Button
-            className="actionButton ml-4 mr-2"
-            style={{width: "200px", marginBottom:80}}
+            className="ml-4 mr-2"
+            style={{width: "200px", marginBottom:80, borderRadius:0, backgroundColor:"#4D29BA"}}
             variant="secondary"
             onClick={(e) => handleClick(true)}
             disabled={!next}>
@@ -164,16 +164,16 @@ function Test() {
           <Result quizScore={score} result={answersList} questions={wrongQuestions} />
           <div className="text-center">
             <Button 
-              className="actionButton mr-4 ml-2"
-              style={{width: "200px", marginBottom:80}}
+              className="mr-4 ml-2"
+              style={{width: "200px", marginBottom:80, borderRadius:0, borderColor:"#4D29BA", backgroundColor:"white", color:"#4D29BA"}}
               variant="secondary"
               onClick={(e) => handleClick(false)}
               disabled={!prev}>
               Back
             </Button>
             <Button
-              className="actionButton ml-4 mr-2"
-              style={{width: "200px", marginBottom:80}}
+              className="ml-4 mr-2"
+              style={{width: "200px", marginBottom:80, borderRadius:0, backgroundColor:"#4D29BA"}}
               variant="secondary"
               onClick={(e) => handleClick(true)}
               disabled={!next}>
