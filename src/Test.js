@@ -14,10 +14,11 @@ function Test() {
   const [questionId, setQuestionId] = useState(1);
   const [question, setQuestion] = useState(quizQuestions[0].question);
   const [answer, setAnswer] = useState('');
-  const [answersList] = useState({});
+  const [answersList, setAnswerList] = useState({});
   const [score, setScore] = useState(0);
   const [buttonName, setButtonName] = useState('');
   const [wrongQuestions, setWrongQuestions] = useState([]);
+  const [resultClick, setResultClick] = useState(null);
 
   function setUserAnswer(ans) {
     setAnswer(ans);
@@ -42,6 +43,21 @@ function Test() {
     } else if (counter === 1) {
       setPrev(false);
       setPrevQuestion();
+    }
+  }
+
+  function handleResultClick(param) {
+    if (!param) {
+      setCounter(0);
+      setPrev(false);
+      setNext(false);
+      setQuestionId(1);
+      setQuestion(quizQuestions[0].question); 
+      setAnswer('');
+      setAnswerList({});
+      setScore(0);
+      setButtonName('');
+      setWrongQuestions([]);         
     }
   }
 
@@ -83,8 +99,10 @@ function Test() {
     setWrongQuestions(questionsList);
     if(scoreValue === quizQuestions.length) {
       setButtonName("Proceed");
+      setResultClick(true);
     } else if (scoreValue < 9) {
       setButtonName("Start Again")
+      setResultClick(false);
     }
     console.log(questionsList);
     console.log(wrongQuestions);
@@ -150,7 +168,7 @@ function Test() {
               className="ml-4 mr-2"
               style={{width: "200px", marginBottom:80, borderRadius:0, backgroundColor:"#4D29BA"}}
               variant="secondary"
-              onClick={(e) => handleClick(true)}
+              onClick={(e) => handleResultClick(resultClick)}
               disabled={!next}>
               {buttonName}
             </Button>
