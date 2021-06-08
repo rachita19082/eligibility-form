@@ -5,7 +5,7 @@ import Summary from './Summary'
 function Result(props) {
   return (
     <div className="result">
-    {props.quizScore == 9 && (
+    {props.quizScore === 9 && (
       <>
       <h2 className="text-center"> You are eligible! </h2>
       <div className="pt-3 pl-5 pr-4 pb-4">

@@ -13,9 +13,8 @@ function Test() {
   const [next, setNext] = useState(false);
   const [questionId, setQuestionId] = useState(1);
   const [question, setQuestion] = useState(quizQuestions[0].question);
-  const [answerOptions, setAnswerOptions] = useState(['Yes', 'No']);
   const [answer, setAnswer] = useState('');
-  const [answersList, setAnswerList] = useState({});
+  const [answersList] = useState({});
   const [score, setScore] = useState(0);
   const [buttonName, setButtonName] = useState('');
   const [wrongQuestions, setWrongQuestions] = useState([]);
@@ -29,20 +28,18 @@ function Test() {
     setUserAnswer(event.currentTarget.value);
     if (questionId <= quizQuestions.length) {
       setNext(true);
-    } else {
-      // do nothing for now
     }
   }
 
   function handleClick(param) {
     if (param && counter<8) {
       setNextQuestion();      
-    } else if (param && counter == 8) {
+    } else if (param && counter === quizQuestions.length-1) {
       getResults();
       setCounter(counter + 1);
     } else if (!param && counter > 1) {
       setPrevQuestion();
-    } else if (counter == 1) {
+    } else if (counter === 1) {
       setPrev(false);
       setPrevQuestion();
     }
@@ -84,34 +81,13 @@ function Test() {
     }
     setScore(scoreValue);
     setWrongQuestions(questionsList);
-    if(scoreValue == 9) {
+    if(scoreValue === quizQuestions.length) {
       setButtonName("Proceed");
     } else if (scoreValue < 9) {
       setButtonName("Start Again")
     }
     console.log(questionsList);
     console.log(wrongQuestions);
-  }
-
-  function setResults (result) {
-    if (result.length === 1) {
-      this.setState({ result: result[0] });
-    } else {
-      this.setState({ result: 'Undetermined' });
-    }
-  }
-
-  function renderQuiz() {
-    return (
-      <Quiz
-        answer={answer}
-        answerOptions={answerOptions}
-        questionId={questionId}
-        question={question}
-        questionTotal={quizQuestions.length}
-        onAnswerSelected={handleAnswerSelected}
-      />
-    );
   }
 
     return (
@@ -121,12 +97,11 @@ function Test() {
       </div>
       
       <div>
-      {counter < 9 && (        
+      {counter < quizQuestions.length && (        
         <>
         <div className="App" style={{paddingBottom:40, textAlign: "left"}}>                
           <Quiz
           answer={answer}
-          answerOptions={answerOptions}
           questionId={questionId}
           question={question}
           questionTotal={quizQuestions.length}
@@ -159,7 +134,7 @@ function Test() {
         </>
         )}
 
-        {counter == 9 && (
+        {counter === quizQuestions.length && (
           <>
           <Result quizScore={score} result={answersList} questions={wrongQuestions} />
           <div className="text-center">
