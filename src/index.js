@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Test from './Test';
+import Eligibility from './Eligibility';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
-  <Test />,
+  <Eligibility />,
   document.getElementById('root')
 );
 

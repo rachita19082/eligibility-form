@@ -3,11 +3,25 @@ code {
     monospace;
 }
 
+@font-face {
+  font-family: 'Now Alt';
+  src: local('Now Alt'), url(./fonts/NowAlt/NowAlt-Regular.otf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Jost-Regular';
+  src: local('Jost-Regular'), url(./fonts/Jost/Jost-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Jost-Light';
+  src: local('Jost-Light'), url(./fonts/Jost/Jost-Light.ttf) format('truetype');
+}
+
 body {
   margin: 0;
   padding: 0;
   background: #fff;
-  font-family: sans-serif, 'Jost';
 }
 
 * {
@@ -43,6 +57,11 @@ body {
   padding-top: 40px;
   border-radius: 3px;
   background-color: #F4F4F4;
+  font-family: 'Jost-Regular';
+}
+
+.faq .faqContent {
+  font-family: 'Jost-Light';
 }
 
 .summary {
@@ -73,12 +92,14 @@ body {
 .questionCount {
   padding: 1.5rem 2.5rem 1rem;
   font-size: 14px;
+  font-family: 'Jost-Light', sans-serif;
 }
 
 /* Question Component */
 .question {
   margin: 0;
   padding: 0.5rem 2.5rem 1.5rem 2.5rem;
+  font-family: 'Jost-Regular', sans-serif;
 }
 
 /* Result Component */
@@ -94,6 +115,7 @@ body {
 /* AnswerOption Component */
 .answerOption {
   border-top: 1px solid #eee;
+  font-family: 'Jost-light';
 }
 
 .answerOption:hover {
