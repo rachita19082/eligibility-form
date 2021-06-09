@@ -60,21 +60,6 @@ body {
   font-family: 'Jost-Regular';
 }
 
-.faq .faqContent {
-  font-family: 'Jost-Light';
-}
-
-.summary {
-  position: relative;
-  max-width: 600px;
-  margin: 0 auto;
-  margin-bottom: 0;
-  padding-bottom: 30px;
-  padding-top: 20px;
-  border-radius: 3px;
-  background-color: #F4F4F4;
-}
-
 @media (min-width: 769px) {
   .container {
     margin: 2.5rem auto;
@@ -110,6 +95,18 @@ body {
   margin: 0 auto;
   background: #fff;
   border-radius: 3px;
+  font-family: 'Jost-Regular';
+}
+
+.summary {
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto;
+  margin-bottom: 0;
+  padding-bottom: 30px;
+  padding-top: 20px;
+  border-radius: 3px;
+  background-color: #F4F4F4;
 }
 
 /* AnswerOption Component */
