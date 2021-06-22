@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import Test from './Test';
+import Eligibility from './Eligibility';
 import './App.css';
 import {Button} from "react-bootstrap";
 
@@ -13,7 +13,7 @@ function App() {
 
   if (startTest) {
     return (      
-      <Test />      
+      <Eligibility />      
     );
   }
 
