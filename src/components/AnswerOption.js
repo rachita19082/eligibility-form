@@ -3,6 +3,25 @@ import PropTypes from 'prop-types';
 
 function AnswerOption(props) {
 
+  function handleKeyDown(e){ 
+
+    if(e.keyCode === 37 || e.keyCode === 39) {
+      e.preventDefault();
+    }
+
+    if(e.keyCode === 38 && props.answerContent === "Yes") {
+      console.log("Enters yes");
+      document.querySelector("#" + props.answerContent).click();
+      e.preventDefault();
+    }
+
+    if(e.keyCode === 40 && props.answerContent === "No") {
+      console.log("Enters no");
+      document.querySelector("#" + props.answerContent).click();
+      e.preventDefault();
+    }
+  }
+
   return (
     <li className="answerOption">
       <label className="radioCustomLabel" htmlFor={props.answerContent}>
@@ -12,6 +31,7 @@ function AnswerOption(props) {
         className="radioCustomButton"
         checked={props.answer === props.answerContent}
         value={props.answerContent}
+        onKeyDown={(e) => handleKeyDown(e)}
         onChange={props.onAnswerSelected}
       />
       <span className="optionContent"> {props.answerContent} </span>
