@@ -3,7 +3,16 @@ import PropTypes from 'prop-types';
 
 function AnswerOption(props) {
 
+  React.useEffect(() => {
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
   function handleKeyDown(e){ 
+    console.log("Enter handle keys in AnswerOption: " + e.keyCode);
 
     if(e.keyCode === 37 || e.keyCode === 39) {
       e.preventDefault();
