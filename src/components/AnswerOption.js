@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 function AnswerOption(props) {
 
-  function handleKeyDown(e){ 
+  function handleKeyDown(e) { 
     console.log("Enter handle keys in AnswerOption: " + e.keyCode);
 
     if(e.keyCode === 37 || e.keyCode === 39) {
@@ -29,7 +29,7 @@ function AnswerOption(props) {
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <li className="answerOption">
