@@ -1,36 +1,26 @@
 import React from 'react';
-import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';  
-import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';  
-import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';  
-import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';  
-import InfoIcon from '@material-ui/icons/Info';   
+import { RiArrowUpFill, RiArrowDownFill, RiArrowRightFill, RiArrowLeftFill } from 'react-icons/ri';
+import { MdKeyboard } from 'react-icons/md';
 import PropTypes from 'prop-types';
-import Popup from 'reactjs-popup';
+import ReactTooltip from "react-tooltip";
 import 'reactjs-popup/dist/index.css';
 
 function QuestionCount(props) {
-  const infoContent = 
-  <div className="p-2" style={{width:150}}> 
-      Use <KeyboardArrowUpIcon style={{ color: 'white', background:'grey', borderRadius:5, marginLeft:5, marginRight:5 }} /> for Yes <br></br>
-      Use <KeyboardArrowDownIcon style={{ color: 'white', background:'grey', borderRadius:5, marginLeft:5, marginRight:5 }} /> for No <br></br>
-      Use <KeyboardArrowRightIcon style={{ color: 'white', background:'grey', borderRadius:5, marginLeft:5, marginRight:5 }} /> for Next <br></br>
-      Use <KeyboardArrowLeftIcon style={{ color: 'white', background:'grey', borderRadius:5, marginLeft:5, marginRight:5 }} /> for Back <br></br>
-  </div>;
   
   return (
     <div className="questionCount">
       Question <span>{props.counter}</span> of <span style={{marginRight:8}}>{props.total}</span>
-      <Popup
-        open={true}
-        trigger={
-          <InfoIcon style={{ color: 'black' }} />
-        }
-        position="right center"
-        on={['hover', 'focus']}
-        closeOnDocumentClick
-      >
-        {infoContent}
-      </Popup>
+      <a data-tip="React-tooltip"> <MdKeyboard style={{ color: 'black', fontSize:'25px' }} /> </a>
+      <ReactTooltip className="tooltipTheme" delayHide={2000} place="right" type="dark" effect="float">
+        <div style={{fontSize:'13px', color:'white'}}> 
+            <div style={{marginBottom:5}}><strong>Keyboard shortcuts</strong></div>
+            <div style={{marginBottom:2}}><span style={{marginRight:27}}><RiArrowUpFill style={{ color: '#A58EF0', marginRight:5, fontSize: '23px' }} /> Yes </span>
+            <span><RiArrowDownFill style={{ color: '#A58EF0', marginRight:5, fontSize: '23px' }} /> No </span></div>
+
+            <span style={{marginRight:20}}><RiArrowRightFill style={{ color: '#A58EF0', marginRight:5, fontSize: '23px' }} /> Next </span>
+            <span><RiArrowLeftFill style={{ color: '#A58EF0', marginRight:5, fontSize: '23px' }} /> Back </span>
+        </div>
+      </ReactTooltip>
     </div>
   );
 }
