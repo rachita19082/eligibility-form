@@ -62,7 +62,7 @@ var quizQuestions = [
   },
   {
       question: "Does the license of libraries/dependencies undermine the openess of the project?",
-      statement: "Documentation must exist of the source code, use cases, and/or functional requirements for projects",
+      statement: "If the project has mandatory dependencies that create more restrictions than the original license, the project(s) must be able to demonstrate independence from the closed component(s) and/or indicate the existence of functional, open alternatives.",
       faq: {
         copy: [
           {
@@ -80,7 +80,7 @@ var quizQuestions = [
   },
   {
       question: "Is there documentation?",
-      statement: "Documentation must exist of the source code, use cases, and/or functional requirements for projects",
+      statement: "The project must have documentation of the source code, use cases, and/or functional requirements.",
       faq: {
         copy: [
                 {
@@ -94,7 +94,7 @@ var quizQuestions = [
   },
   {
     question: "Does this project collect or use non-personally identifiable information (non-PII) data?",
-    statement: "Documentation must exist of the source code, use cases, and/or functional requirements for projects",
+    statement: "If the project has non personally identifiable information (PII) there must be a mechanism for extracting or importing non-PII data from the system in a non-proprietary format.",
     faq: {
       copy: [
               {
@@ -112,7 +112,7 @@ var quizQuestions = [
   },
   {
     question: "Does the project adhere to privacy and other applicable international and domestic laws?",
-    statement: "Documentation must exist of the source code, use cases, and/or functional requirements for projects",
+    statement: "The project must state to the best of its knowledge that it complies with relevant privacy laws, and all applicable international and domestic laws.",
     faq: {
       copy: [
               {
@@ -126,7 +126,7 @@ var quizQuestions = [
   },
   {
     question: "Does the project adhere to standards and best practices?",
-    statement: "Documentation must exist of the source code, use cases, and/or functional requirements for projects",
+    statement: "Projects must demonstrate adherence to standards, best practices, and/or principles.",
     faq: {
       copy: [
               {
@@ -141,8 +141,8 @@ var quizQuestions = [
     }
   },
   {
-    question: "Does the project do no harm?",
-    statement: "Documentation must exist of the source code, use cases, and/or functional requirements for projects",
+    question: "Does the project take steps to anticipate, prevent and do no harm?",
+    statement: "All projects must demonstrate that they have taken steps to ensure the project anticipates, prevents, and does no harm.",
     faq: {
       copy: [
               {

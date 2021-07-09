@@ -15,7 +15,30 @@ function Result(props) {
       </>
     )}
 
-    {props.quizScore < 9 && (
+    {props.quizScore < 9 && props.questions.length === 0 && props.maybeQuestions.length > 0 && (
+      <>
+      <h2 className="text-center"> You may be eligible! </h2>
+      <div className="pt-3 pl-5 pr-4 pb-4" style={{fontFamily:'Jost-light'}}>
+        You correctly answered <strong>{props.quizScore}/9</strong> in the Eligibility Test. You may be eligible to nominate
+        your project to DPG based on the conditions given below. 
+      </div>
+      <div className="summary">    
+          
+          {props.maybeQuestions.map((object, index) => (
+              <Summary
+                key={index}
+                index={index}
+                statement={props.maybeQuestions[index].statement}
+                name={props.maybeQuestions[index].faq.name}
+                link={props.maybeQuestions[index].faq.link}
+              />
+          ))}
+
+      </div>
+      </>
+    )}
+
+    {props.quizScore < 9 && props.questions.length > 0 && (
       <>
       <h2 className="text-center"> You are not eligible! </h2>
       <div className="pt-3 pl-5 pr-4 pb-4" style={{fontFamily:'Jost-light'}}>
@@ -33,6 +56,23 @@ function Result(props) {
                 link={props.questions[index].faq.link}
               />
           ))}
+
+          {props.maybeQuestions.length > 0 && (
+            <>
+            <div className="pl-5 pr-5 pt-4" style={{fontSize:20}}>
+              Furthermore,
+            </div>
+            {props.maybeQuestions.map((object, index) => (
+                <Summary
+                  key={index}
+                  index={index}
+                  statement={props.maybeQuestions[index].statement}
+                  name={props.maybeQuestions[index].faq.name}
+                  link={props.maybeQuestions[index].faq.link}
+                />
+            ))}
+            </>
+          )}
               
       </div>
       </>
