@@ -1,4 +1,6 @@
-import React, {useState} from "react";
+import React, {useState, useCallback} from "react";
+import {useCookies} from "react-cookie";
+import {v4 as uuidv4} from "uuid";
 import Quiz from './components/Quiz';
 import Result from './components/Result';
 import FAQ from './components/FAQ';
@@ -19,14 +21,35 @@ function Eligibility() {
   const [wrongQuestions, setWrongQuestions] = useState([]);
   const [maybeQuestions, setMaybeQuestions] = useState([]);
   const [resultClick, setResultClick] = useState(null);
+  const [cookies, setCookie] = useCookies(["uuid"]);
+  const [values, setValues] = useState({name: "Project Name"});
 
   React.useEffect(() => {
     document.addEventListener('keydown', handleKeys);
 
+    // Initialize cookie if not present
+    const userId = uuidv4();
+    if (!cookies.uuid) {
+      setCookie("uuid", userId, {path: "/", maxAge: 2592000}); // maxAge: 30 days
+    } 
+
     return () => {
       document.removeEventListener('keydown', handleKeys);
     };
+
   }, []);
+
+  const debounce = (func, wait) => {
+    let timeout;
+    return function (...args) {
+      const context = this;
+      if (timeout) clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        timeout = null;
+        func.apply(context, args);
+      }, wait);
+    };
+  };
 
   function handleKeys(e){ 
     console.log("Enter handle keys : " + e.keyCode);
@@ -74,7 +97,29 @@ function Eligibility() {
       setButtonName('');
       setWrongQuestions([]);         
     } else if (param) {
+      debouncedSave(values);
       window.open("https://submission-digitalpublicgoods.vercel.app/");
+    }
+  }
+
+  const debouncedSave = useCallback(
+    debounce((vals) => saveToDb(vals), 1000),
+    [cookies.uuid]
+  );
+
+  async function saveToDb(vals) {
+    if (cookies.uuid) {
+      console.log("Enters saveToDb");
+      await fetch(`/api/saveDB/${cookies.uuid}`, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          accept: "application/json",
+        },
+        body: JSON.stringify({
+          values: vals,
+        }),
+      });
     }
   }
 
@@ -108,12 +153,10 @@ function Eligibility() {
     let questionsList = [];
     let maybeList = [];
     while (i < 9) {
-      if((i===3 || i===5) && answersList[i] === "No") {
+      if(answersList[i] === quizQuestions[i].answer) {
         scoreValue += 1;
-      } else if ((i===3 || i===5) && answersList[i] === "Yes") {
+      } else if (answersList[i] !== quizQuestions[i].answer && quizQuestions[i].maybe) {
         maybeList.push(quizQuestions[i]);
-      } else if(i!==3 && i!==5 && answersList[i] === "Yes") {
-        scoreValue += 1;
       } else {
         questionsList.push(quizQuestions[i]);
       }
@@ -123,10 +166,10 @@ function Eligibility() {
     setWrongQuestions(questionsList);
     setMaybeQuestions(maybeList); 
 
-    if(scoreValue === quizQuestions.length) {
+    if(scoreValue === quizQuestions.length || scoreValue + maybeList.length === quizQuestions.length) {
       setButtonName("Proceed");
       setResultClick(true);
-    } else if (scoreValue < 9) {
+    } else {
       setButtonName("Start Again")
       setResultClick(false);
     }
