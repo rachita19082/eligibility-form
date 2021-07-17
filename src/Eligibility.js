@@ -22,7 +22,7 @@ function Eligibility() {
   const [maybeQuestions, setMaybeQuestions] = useState([]);
   const [resultClick, setResultClick] = useState(null);
   const [cookies, setCookie] = useCookies(["uuid"]);
-  const [values, setValues] = useState({name: "Project Name"});
+  const [values, setValues] = useState({});
 
   React.useEffect(() => {
     document.addEventListener('keydown', handleKeys);
@@ -37,7 +37,7 @@ function Eligibility() {
       document.removeEventListener('keydown', handleKeys);
     };
 
-  }, []);
+  });
 
   const debounce = (func, wait) => {
     let timeout;
@@ -110,7 +110,7 @@ function Eligibility() {
   async function saveToDb(vals) {
     if (cookies.uuid) {
       console.log("Enters saveToDb");
-      await fetch(`/api/saveDB/${cookies.uuid}`, {
+      await fetch(`https://submission-digitalpublicgoods.vercel.app/api/saveDB/${cookies.uuid}`, {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -152,7 +152,18 @@ function Eligibility() {
     let scoreValue = 0;
     let questionsList = [];
     let maybeList = [];
+    let valueList = {};
     while (i < 9) {
+      if(i > 1) {
+        if(answersList[i] === quizQuestions[i].answer)
+          valueList[quizQuestions[i].fieldName] = quizQuestions[i].answer;
+        else {
+          if(quizQuestions[i].answer === "Yes")
+            valueList[quizQuestions[i].fieldName] = "No";
+          else
+            valueList[quizQuestions[i].fieldName] = "Yes";
+        }
+      }
       if(answersList[i] === quizQuestions[i].answer) {
         scoreValue += 1;
       } else if (answersList[i] !== quizQuestions[i].answer && quizQuestions[i].maybe) {
@@ -165,6 +176,8 @@ function Eligibility() {
     setScore(scoreValue);
     setWrongQuestions(questionsList);
     setMaybeQuestions(maybeList); 
+    setValues(valueList);
+    console.log(valueList);
 
     if(scoreValue === quizQuestions.length || scoreValue + maybeList.length === quizQuestions.length) {
       setButtonName("Proceed");
