@@ -11,7 +11,7 @@ function QuestionCount(props) {
     <div className="questionCount">
       Question <span>{props.counter}</span> of <span style={{marginRight:8}}>{props.total}</span>
       <a data-tip="React-tooltip"> <MdKeyboard style={{ color: 'black', fontSize:'25px' }} /> </a>
-      <ReactTooltip className="tooltipTheme" delayHide={2000} place="right" type="dark" effect="float">
+      <ReactTooltip className="tooltipTheme" place="right" type="dark" effect="float">
         <div style={{fontSize:'13px', color:'white'}}> 
             <div style={{marginBottom:5}}><strong>Keyboard shortcuts</strong></div>
             <div style={{marginBottom:2}}><span style={{marginRight:27}}><RiArrowUpFill style={{ color: '#A58EF0', marginRight:5, fontSize: '23px' }} /> Yes </span>

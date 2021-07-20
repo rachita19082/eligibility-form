@@ -6,6 +6,8 @@ import Result from './components/Result';
 import FAQ from './components/FAQ';
 import quizQuestions from './api/quizQuestions';
 import {Button} from "react-bootstrap";
+import { ProgressBar } from "react-step-progress-bar";
+import Paper from '@material-ui/core/Paper';
 import './index.css';
 
 function Eligibility() {
@@ -153,6 +155,7 @@ function Eligibility() {
     let questionsList = [];
     let maybeList = [];
     let valueList = {};
+    
     while (i < 9) {
       if(i > 1) {
         if(answersList[i] === quizQuestions[i].answer)
@@ -198,10 +201,20 @@ function Eligibility() {
         <h2>Eligibility Test</h2>
       </div>
       
+      <center>
+      <div className="pt-2 pb-3" style={{width:"60%"}}>
+        
+        <ProgressBar
+          filledBackground="linear-gradient(to right, #cdbdff, #4d29ba)"
+          percent={(questionId/9)*100}
+        />
+      </div>
+
+      <Paper className="pt-3 m-3 card" variant="outlined" elevation={5}>
       <div>
       {counter < quizQuestions.length && (        
         <>
-        <div className="App" style={{paddingBottom:40, textAlign: "left"}}>                
+        <div className="App" style={{paddingBottom:30, textAlign: "left"}}>                
           <Quiz
           answer={answer}
           questionId={questionId}
@@ -214,7 +227,7 @@ function Eligibility() {
         <div className="text-center">
           <Button 
             className="ml-2"
-            style={{width: "200px", marginRight:25, marginBottom:80, borderRadius:0, borderColor:"#4D29BA", backgroundColor:"white", color:"#4D29BA", fontFamily:'Jost-Light'}}
+            style={{width: "200px", marginRight:25, marginBottom:50, borderRadius:0, borderColor:"#4D29BA", backgroundColor:"white", color:"#4D29BA", fontFamily:'Jost-Light'}}
             variant="secondary"
             onClick={(e) => handleClick(false)}
             disabled={!prev}
@@ -223,7 +236,7 @@ function Eligibility() {
           </Button>
           <Button
             className="mr-2"
-            style={{width: "200px", marginLeft:25, marginBottom:80, borderRadius:0, backgroundColor:"#4D29BA", fontFamily:'Jost-Light'}}
+            style={{width: "200px", marginLeft:25, marginBottom:50, borderRadius:0, backgroundColor:"#4D29BA", fontFamily:'Jost-Light'}}
             variant="secondary"
             onClick={(e) => handleClick(true)}
             disabled={!next}
@@ -261,7 +274,9 @@ function Eligibility() {
           </div>
           </>
         )}
-        </div> 
+        </div>
+        </Paper>
+        </center> 
 
         </>
       );

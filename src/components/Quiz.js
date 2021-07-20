@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from 'prop-types';
 import AnswerOption from './AnswerOption';
 import "react-step-progress-bar/styles.css";
-import { ProgressBar } from "react-step-progress-bar";
 import QuestionCount from './QuestionCount';
 import Question from './Question';
 
@@ -11,15 +10,11 @@ function Quiz(props) {
     return (
         <div className="quiz pt-0 pl-3 pr-3">
 
-          <ProgressBar
-            filledBackground="linear-gradient(to right, #cdbdff, #4d29ba)"
-            percent={(props.questionId/props.questionTotal)*100}
-          />
-
           <QuestionCount
             counter={props.questionId}
             total={props.questionTotal}
           />
+
           <Question content={props.question} />
           <ul className="answerOptions">            
             <AnswerOption
