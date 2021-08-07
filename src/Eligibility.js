@@ -1,11 +1,13 @@
 import React, {useState, useCallback} from "react";
 import {useCookies} from "react-cookie";
 import {v4 as uuidv4} from "uuid";
-import Quiz from './components/Quiz';
 import Result from './components/Result';
+import AnswerOption from './components/AnswerOption';
+import QuestionCount from './components/QuestionCount';
 import FAQ from './components/FAQ';
 import quizQuestions from './api/quizQuestions';
 import {Button} from "react-bootstrap";
+import "react-step-progress-bar/styles.css";
 import { ProgressBar } from "react-step-progress-bar";
 import Paper from '@material-ui/core/Paper';
 import './index.css';
@@ -14,7 +16,7 @@ function Eligibility() {
   const [counter, setCounter] = useState(0);
   const [prev, setPrev] = useState(false);
   const [next, setNext] = useState(false);
-  const [questionId, setQuestionId] = useState(1);
+  const [questionId, setQuestionId] = useState(0);
   const [question, setQuestion] = useState(quizQuestions[0].question);
   const [answer, setAnswer] = useState('');
   const [answersList, setAnswerList] = useState({});
@@ -25,6 +27,7 @@ function Eligibility() {
   const [resultClick, setResultClick] = useState(null);
   const [cookies, setCookie] = useCookies(["uuid"]);
   const [values, setValues] = useState({});
+  const [startQuiz, setStartQuiz] = useState(false);
 
   React.useEffect(() => {
     document.addEventListener('keydown', handleKeys);
@@ -202,32 +205,66 @@ function Eligibility() {
       </div>
       
       <center>
-      <div className="pt-2 pb-3" style={{width:"60%"}}>
-        
+      <div className="pt-3 pb-4" style={{width:"60%"}}>
         <ProgressBar
           filledBackground="linear-gradient(to right, #cdbdff, #4d29ba)"
           percent={(questionId/9)*100}
         />
       </div>
 
-      <Paper className="pt-3 m-3 card" variant="outlined" elevation={5}>
+      <Paper className="pt-4 m-3 card" variant="outlined" elevation={5}>
       <div>
-      {counter < quizQuestions.length && (        
+      {!startQuiz && (
         <>
-        <div className="App" style={{paddingBottom:30, textAlign: "left"}}>                
-          <Quiz
-          answer={answer}
-          questionId={questionId}
-          question={question}
-          questionTotal={quizQuestions.length}
-          onAnswerSelected={handleAnswerSelected}
-          />
+        <div className="p-3">
+          <h3 className="pl-3 pr-3" style={{fontFamily:"Now Alt", color:"#2b209a"}}> Is your digital solution ready to be a Digital Public Good? </h3>
+          <div className="text-left p-4" style={{fontFamily:"Jost-Light"}}> 
+          This submission form requests information that will be used to assess whether a project meets the minimum requirements to be considered a Digital Public Good according to the DPG Alliance. This process is being regularly updated and improved so additional information may be requested in addition to what is collected through this form.
+          <br />Please check the submission guide in advance to know what information will be requested of you. If you do not have all of the information about a project you may still submit it. Please provide as much information as possible. Projects with more complete information will move more quickly through the vetting process.
+          <br />Problems? nominations@digitalpublicgoods.net
+          </div>
         </div>
 
+        <Button
+          className="mr-2"
+          style={{width: "200px", marginLeft:25, marginBottom:30, borderRadius:0, backgroundColor:"#4D29BA", fontFamily:'Jost-Light'}}
+          variant="secondary"
+          onClick={(e) => {setStartQuiz(true); setQuestionId(1);}}
+          id="nextButton">
+          Start Assessment
+        </Button>
+        </>
+      )}
+      {startQuiz && counter < quizQuestions.length && (        
+        <>
+          <div className="quiz pt-0 pl-3 pr-3 text-left">
+
+            <QuestionCount
+              counter={questionId}
+              total={quizQuestions.length}
+            />
+
+            <h4 className="question pl-4">{question} <a href="#FAQ" style={{fontSize:13, textDecoration:"underline", color:"#4D29BA"}}> Not sure? </a></h4>
+
+            <ul className="answerOptions">            
+              <AnswerOption
+                  answerContent="Yes"
+                  answer={answer}
+                  onAnswerSelected={handleAnswerSelected}
+              />            
+              
+              <AnswerOption
+                  answerContent="No"
+                  answer={answer}
+                  onAnswerSelected={handleAnswerSelected}
+              />             
+            </ul>
+          </div>               
+        
         <div className="text-center">
           <Button 
             className="ml-2"
-            style={{width: "200px", marginRight:25, marginBottom:50, borderRadius:0, borderColor:"#4D29BA", backgroundColor:"white", color:"#4D29BA", fontFamily:'Jost-Light'}}
+            style={{width: "200px", marginRight:25, marginBottom:30, borderRadius:0, borderColor:"#4D29BA", backgroundColor:"white", color:"#4D29BA", fontFamily:'Jost-Light'}}
             variant="secondary"
             onClick={(e) => handleClick(false)}
             disabled={!prev}
@@ -236,7 +273,7 @@ function Eligibility() {
           </Button>
           <Button
             className="mr-2"
-            style={{width: "200px", marginLeft:25, marginBottom:50, borderRadius:0, backgroundColor:"#4D29BA", fontFamily:'Jost-Light'}}
+            style={{width: "200px", marginLeft:25, marginBottom:30, borderRadius:0, backgroundColor:"#4D29BA", fontFamily:'Jost-Light'}}
             variant="secondary"
             onClick={(e) => handleClick(true)}
             disabled={!next}
@@ -246,12 +283,12 @@ function Eligibility() {
         </div>
 
         <div style={{backgroundColor:"#F4F4F4"}}>
-          <FAQ content={quizQuestions[counter].faq} /> 
+          <a name="FAQ"><FAQ content={quizQuestions[counter].faq} /></a>
         </div>
         </>
-        )}
+      )}
 
-        {counter === quizQuestions.length && (
+      {startQuiz && counter === quizQuestions.length && (
           <>
           <Result quizScore={score} result={answersList} questions={wrongQuestions} maybeQuestions={maybeQuestions} />
           <div className="text-center">
@@ -273,7 +310,7 @@ function Eligibility() {
             </Button>
           </div>
           </>
-        )}
+      )}
         </div>
         </Paper>
         </center> 
@@ -283,4 +320,3 @@ function Eligibility() {
   }
   
   export default Eligibility;
-

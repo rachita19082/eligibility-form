@@ -4,7 +4,7 @@ function FAQ(props) {
   return (
     <>
     <div className="faq pb-4 pr-5 pl-5 text-left">
-      <h4 style={{fontFamily:'Now Alt', color:'#4D29BA', marginBottom:20}}>Frequently Asked Questions</h4>
+      <h4 style={{fontFamily:'Now Alt', color:'#2b209a', marginBottom:20}}>Frequently Asked Questions</h4>
       {props.content.copy && props.content.copy.map((copy, index) =>
         <>
           <h5> {copy.subHeading} </h5>
